@@ -5,28 +5,26 @@ Marissa Almonte and Tarunyaa Sivakumar
 
 ## Project Proposal: C++ Chat Application
 ### Overview
-Our project aims to develop a chat application using C++, providing a real-time messaging platform. This application will serve as a learning project to integrate various aspects of C++ programming, including websockets, server-side scripting, and potentially database integration for storing user data and messages. The primary goal is to facilitate understanding of web development topics within the C++ ecosystem and to showcase the application of C++ in creating networked applications.
+Our project aims to develop a Wordle game using C++, providing a text-based interface for players to guess a hidden word within a limited number of attempts inspired by the NYT game. This application will incorporate templates for flexibility and using the Qt framework to implement a graphical user interface to increase our complexity. 
+
 
 ### Technical Specifications and Libraries
-The chat application will be based on a client-server model utilizing sockets for network communication. For the server part, we plan to use POSIX sockets on Unix/Linux or Winsock on Windows to handle networking. The Boost.Asio library, which provides support for network and low-level I/O programming, will be considered to simplify operations and improve portability across platforms.
+The Wordle game will leverage C++ templates for generic programming, allowing us to create flexible data structures and algorithms that can operate on various data types. This approach will enable us to handle different inputs and tiles in the game’s grid. 
 
-To support multiple clients and handle asynchronous operations, we'll leverage C++'s multi-threading capabilities, possibly employing the Standard Template Library (STL) for thread management. This approach will ensure that our server can handle multiple connections simultaneously, allowing real-time communication between clients.
+For the graphical user interface, we will utilize the Qt framework. Qt's extensive library of widgets, layouts, and event handling mechanisms will enable us to design an interactive and visually appealing interface for our Wordle game.
+
 
 ### Structure and Features
-The application will have a clear separation between the server and client modules. The server will be responsible for accepting connections, handling incoming messages, and broadcasting them to all connected clients. The client module will handle user input, send messages to the server, and display incoming messages from the server.
+The application will consist of a single-player Wordle game with a Qt-based GUI. The game mechanics will remain consistent with NYT’s Wordle gameplay, where the player attempts to guess a hidden word within a limited number of attempts.
 
-We plan to implement a basic text-based interface for the chat application. However, exploring a graphical user interface (GUI) using a library like Qt or SFML is also on our radar for future enhancements. This would make the application more user-friendly and accessible to a wider audience.
+Key features of the project include:
 
-The project will be structured around several key classes, including:
+- A Game class utilizing templates for word storage and processing
+- Qt widgets and layouts for displaying the game interface
+- Event handling mechanisms to capture player input, process guesses, and update the GUI dynamically based on game progress
 
-- A Server class to manage client connections and message broadcasting.
-- A Client class to handle user interaction and communication with the server.
-- Utility classes for managing messages, users, and possibly persistent storage.
 
 ### Development Timeline and Collaboration
-The project is estimated to take around 2 weeks to complete, with the first week dedicated to research and planning, including a deep dive into necessary libraries and setting up the development environment. The first week will also focus on implementing the core functionality (server-client communication and multi-threading). The following week will be allocated for additional features and testing. The final week will be reserved for bug fixing, documentation, and final touches.
+The project timeline is estimated to span approximately two weeks, with the initial phase focused on setting up the development environment, researching Qt framework since neither of us have worked with it before, and designing the data structures and template-based components. The second week will be dedicated to implementing core functionalities, including the Wordle game logic and Qt GUI elements. The final days will be allocated for testing, bug fixing, and refining the GUI layout and aesthetics.
 
-The work will be divided among our group members based on individual strengths and learning goals. Regular meetings will ensure that everyone is on track and facilitate collaboration on challenging parts of the project.
-
-### Conclusion
-This chat application project represents an excellent opportunity to apply and enhance our C++ programming skills, especially in areas like networking, multi-threading, and possibly GUI development. By tackling this project, we aim to build a solid foundation for more complex applications and prepare ourselves for professional C++ development roles.
+Both members of the team will help with setting up the classes, data structures, and event handling functions. Marissa will take the lead on the GUI implementation with GUI. ​​Tarunyaa will take the lead on implementing the game logic. 
