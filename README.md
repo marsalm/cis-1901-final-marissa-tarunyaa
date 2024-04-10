@@ -24,7 +24,7 @@ The project will be structured around several key classes, including:
 - Utility classes for managing messages, users, and possibly persistent storage.
 
 ### Development Timeline and Collaboration
-The project is estimated to take around 8 weeks to complete, with the first two weeks dedicated to research and planning, including a deep dive into necessary libraries and setting up the development environment. The next three weeks will focus on implementing the core functionality (server-client communication and multi-threading). The following two weeks will be allocated for additional features and testing. The final week will be reserved for bug fixing, documentation, and final touches.
+The project is estimated to take around 2 weeks to complete, with the first week dedicated to research and planning, including a deep dive into necessary libraries and setting up the development environment. The first week will also focus on implementing the core functionality (server-client communication and multi-threading). The following week will be allocated for additional features and testing. The final week will be reserved for bug fixing, documentation, and final touches.
 
 The work will be divided among our group members based on individual strengths and learning goals. Regular meetings will ensure that everyone is on track and facilitate collaboration on challenging parts of the project.
 
