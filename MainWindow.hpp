@@ -1,12 +1,12 @@
-#ifndef MAINWINDOW_HPP
-#define MAINWINDOW_HPP
+#ifndef __MAINWINDOW_HPP__
+#define __MAINWINDOW_HPP__
 
 #include <QMainWindow>
 #include <QPushButton>
 #include <QLineEdit>
 #include <QLabel>
 #include <QGridLayout>
-#include "Game.h"
+#include "game.hpp"
 
 class MainWindow : public QMainWindow 
 {

@@ -1,8 +1,8 @@
-#include "Game.hpp"
+#include "game.hpp"
 
 Game::Game() : remainingGuesses(6) 
 {
-    hiddenWord = "hello";  // Hardcoded for demonstration; you should implement a word list
+    hiddenWord = "hello";  
 }
 
 QString Game::processGuess(const QString &guess) 
