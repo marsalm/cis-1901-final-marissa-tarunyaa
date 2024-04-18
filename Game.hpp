@@ -15,4 +15,4 @@ private:
     int remainingGuesses;
 };
 
-#endif // GAME_H
+#endif // GAME_HPP
