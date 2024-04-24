@@ -12,7 +12,7 @@ public:
 
 private:
     QString hiddenWord;
-    // int remainingGuesses;
+    int remainingGuesses;
 };
 
 #endif // GAME_HPP
