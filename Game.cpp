@@ -3,6 +3,8 @@
 #include <fstream>
 #include <random>
 #include <ctime>
+#include <cctype> 
+#include <vector>
 
 // Constructor
 Game::Game() : remainingGuessesValue(6)
@@ -39,28 +41,39 @@ QString Game::processGuess(const QString &guess)
         return "Incorrect length";
     }
 
-    std::string stdGuess = guess.toStdString();
-    std::string stdHiddenWord = hiddenWord.toStdString();
+    std::string stdGuess = guess.toLower().toStdString();
+    std::string stdHiddenWord = hiddenWord.toLower().toStdString();
     std::string result(stdGuess.size(), '_');
 
-    std::transform(stdGuess.begin(), stdGuess.end(), stdHiddenWord.begin(), result.begin(),
-                   [&stdHiddenWord](char g, char h) -> char {
-                       if (g == h)
-                       {
-                           return g;
+    // Used letters in the hidden word to avoid multiple marking
+    std::vector<bool> used(stdHiddenWord.size(), false);
+
+    // First pass with transform: Check for correct letters in the correct positions
+    std::transform(stdGuess.begin(), stdGuess.end(), stdHiddenWord.begin(), result.begin(), 
+                   [&](char g, char h) -> char {
+                       size_t index = &h - &*stdHiddenWord.begin(); // Calculate index
+                       if (g == h) {
+                           used[index] = true; // Mark this character as used
+                           return std::tolower(g); // Return the uppercase version of g
                        }
-                       else if (stdHiddenWord.find(g) != std::string::npos)
-                       {
-                           return '*';
-                       }
-                       else
-                       {
-                           return '_';
-                       }
+                       return '_';
                    });
 
+    // Second pass: Check for correct letters in incorrect positions
+    for (size_t i = 0; i < stdGuess.size(); ++i) {
+        if (result[i] == '_') { // Not correctly guessed
+            for (size_t j = 0; j < stdHiddenWord.size(); ++j) {
+                if (stdGuess[i] == stdHiddenWord[j] && !used[j]) {
+                    used[j] = true;
+                    result[i] = '*'; // Mark as correct letter, wrong position
+                    break;
+                }
+            }
+        }
+    }
+
     remainingGuessesValue--;
-    qDebug() << "Guess Result: " << QString::fromStdString(result);;
+    qDebug() << "Guess Result: " << QString::fromStdString(result);
     return QString::fromStdString(result);
 }
 
