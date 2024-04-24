@@ -79,3 +79,9 @@ QString Game::getHiddenWord() const
 {
     return hiddenWord;
 }
+
+bool Game::wordExists(const QString &word)
+{
+    std::string lowerWord = word.toLower().toStdString();  // Convert to lower case for comparison
+    return std::find(words.begin(), words.end(), lowerWord) != words.end();
+}

@@ -37,11 +37,19 @@ void MainWindow::onGuessEntered()
     QString guess = input->text().toUpper();
     if (guess.length() != 5) {
         QMessageBox::warning(this, "Invalid Input", "Please enter a 5-letter word.");
+        input->clear();
         return;
     }
-    QString result = game.processGuess(guess.toLower()); // Make sure to pass the guess in lower case
-    input->clear();
+    
+    // Check if the word exists in the list
+    if (!game.wordExists(guess)) {
+        QMessageBox::warning(this, "Invalid Guess", "That word doesn't exist, guess again!");
+        input->clear();
+        return;
+    }
 
+    QString result = game.processGuess(guess);
+    input->clear();
     // Display the result on the grid
     static int currentRow = 0;
     if (currentRow < 6) {

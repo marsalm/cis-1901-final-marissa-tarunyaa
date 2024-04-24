@@ -12,6 +12,7 @@ public:
     void resetGame();                  // Resets the game to start anew
     int remainingGuesses() const;      // Getter for the remaining guesses
     QString getHiddenWord() const;     // Getter for the hidden word
+    bool wordExists(const QString &word); // Check if guessed word exists in words.txt
 
 private:
     QString hiddenWord;                // The word that needs to be guessed
