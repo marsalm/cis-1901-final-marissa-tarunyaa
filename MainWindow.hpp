@@ -1,28 +1,32 @@
-#ifndef __MAINWINDOW_HPP__
-#define __MAINWINDOW_HPP__
+#ifndef MAINWINDOW_HPP
+#define MAINWINDOW_HPP
 
 #include <QMainWindow>
-#include <QPushButton>
-#include <QLineEdit>
-#include <QLabel>
+#include <QWidget>
 #include <QGridLayout>
-#include "game.hpp"
+#include <QPushButton>
+#include <QLabel>
+#include <QLineEdit>
+#include "Game.hpp"
 
-class MainWindow : public QMainWindow 
+class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
+    explicit MainWindow(QWidget *parent = nullptr);
+
+private:
+    QWidget *widget;
+    QGridLayout *layout;
+    QLineEdit *input;
+    QLabel *resultLabel;
+    QPushButton *playAgainButton;  
+    Game game;
 
 private slots:
     void onGuessEntered();
-
-private:
-    Game game;
-    QLineEdit *input;
-    QLabel *resultLabel;
-    QGridLayout *layout;
+    void onPlayAgainClicked(); 
 };
 
 #endif // MAINWINDOW_HPP
