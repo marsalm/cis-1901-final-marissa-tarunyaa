@@ -1,4 +1,5 @@
 #include "Game.hpp"
+#include <QDebug>
 #include <fstream>
 #include <random>
 #include <ctime>
@@ -59,6 +60,7 @@ QString Game::processGuess(const QString &guess)
                    });
 
     remainingGuessesValue--;
+    qDebug() << "Guess Result: " << QString::fromStdString(result);;
     return QString::fromStdString(result);
 }
 
@@ -71,4 +73,9 @@ void Game::resetGame()
 int Game::remainingGuesses() const
 {
     return remainingGuessesValue;
+}
+
+QString Game::getHiddenWord() const 
+{
+    return hiddenWord;
 }

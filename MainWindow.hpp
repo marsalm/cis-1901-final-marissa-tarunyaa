@@ -7,6 +7,7 @@
 #include <QPushButton>
 #include <QLabel>
 #include <QLineEdit>
+#include <QVector>
 #include "Game.hpp"
 
 class MainWindow : public QMainWindow
@@ -18,15 +19,15 @@ public:
 
 private:
     QWidget *widget;
-    QGridLayout *layout;
+    QGridLayout *mainLayout;
     QLineEdit *input;
-    QLabel *resultLabel;
-    QPushButton *playAgainButton;  
+    QPushButton *submitButton;
+    QVector<QVector<QLabel*>> gridLabels; 
     Game game;
 
 private slots:
     void onGuessEntered();
-    void onPlayAgainClicked(); 
+    void checkGameOver(int currentRow, const QString& result);
 };
 
 #endif // MAINWINDOW_HPP

@@ -39,7 +39,9 @@ constexpr auto qt_meta_stringdata_CLASSMainWindowENDCLASS = QtMocHelpers::string
     "MainWindow",
     "onGuessEntered",
     "",
-    "onPlayAgainClicked"
+    "checkGameOver",
+    "currentRow",
+    "result"
 );
 #else  // !QT_MOC_HAS_STRINGDATA
 #error "qtmochelpers.h not found or too old."
@@ -61,11 +63,11 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSMainWindowENDCLASS[] = {
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
        1,    0,   26,    2, 0x08,    1 /* Private */,
-       3,    0,   27,    2, 0x08,    2 /* Private */,
+       3,    2,   27,    2, 0x08,    2 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
-    QMetaType::Void,
+    QMetaType::Void, QMetaType::Int, QMetaType::QString,    4,    5,
 
        0        // eod
 };
@@ -81,8 +83,10 @@ Q_CONSTINIT const QMetaObject MainWindow::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<MainWindow, std::true_type>,
         // method 'onGuessEntered'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
-        // method 'onPlayAgainClicked'
-        QtPrivate::TypeAndForceComplete<void, std::false_type>
+        // method 'checkGameOver'
+        QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        QtPrivate::TypeAndForceComplete<int, std::false_type>,
+        QtPrivate::TypeAndForceComplete<const QString &, std::false_type>
     >,
     nullptr
 } };
@@ -94,11 +98,10 @@ void MainWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, 
         (void)_t;
         switch (_id) {
         case 0: _t->onGuessEntered(); break;
-        case 1: _t->onPlayAgainClicked(); break;
+        case 1: _t->checkGameOver((*reinterpret_cast< std::add_pointer_t<int>>(_a[1])),(*reinterpret_cast< std::add_pointer_t<QString>>(_a[2]))); break;
         default: ;
         }
     }
-    (void)_a;
 }
 
 const QMetaObject *MainWindow::metaObject() const

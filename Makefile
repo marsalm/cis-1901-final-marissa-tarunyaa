@@ -1205,6 +1205,8 @@ moc_MainWindow.cpp: MainWindow.hpp \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/qlabel.h \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/QLineEdit \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/qlineedit.h \
+		/opt/homebrew/lib/QtCore.framework/Headers/QVector \
+		/opt/homebrew/lib/QtCore.framework/Headers/qvector.h \
 		Game.hpp \
 		/opt/homebrew/lib/QtCore.framework/Headers/QString \
 		/opt/homebrew/lib/QtCore.framework/Headers/qstring.h \
@@ -1232,7 +1234,9 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 
 Game.o: Game.cpp Game.hpp \
 		/opt/homebrew/lib/QtCore.framework/Headers/QString \
-		/opt/homebrew/lib/QtCore.framework/Headers/qstring.h
+		/opt/homebrew/lib/QtCore.framework/Headers/qstring.h \
+		/opt/homebrew/lib/QtCore.framework/Headers/QDebug \
+		/opt/homebrew/lib/QtCore.framework/Headers/qdebug.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Game.o Game.cpp
 
 main.o: main.cpp /opt/homebrew/lib/QtWidgets.framework/Headers/QApplication \
@@ -1250,6 +1254,8 @@ main.o: main.cpp /opt/homebrew/lib/QtWidgets.framework/Headers/QApplication \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/qlabel.h \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/QLineEdit \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/qlineedit.h \
+		/opt/homebrew/lib/QtCore.framework/Headers/QVector \
+		/opt/homebrew/lib/QtCore.framework/Headers/qvector.h \
 		Game.hpp \
 		/opt/homebrew/lib/QtCore.framework/Headers/QString \
 		/opt/homebrew/lib/QtCore.framework/Headers/qstring.h
@@ -1268,9 +1274,15 @@ MainWindow.o: MainWindow.cpp MainWindow.hpp \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/qlabel.h \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/QLineEdit \
 		/opt/homebrew/lib/QtWidgets.framework/Headers/qlineedit.h \
+		/opt/homebrew/lib/QtCore.framework/Headers/QVector \
+		/opt/homebrew/lib/QtCore.framework/Headers/qvector.h \
 		Game.hpp \
 		/opt/homebrew/lib/QtCore.framework/Headers/QString \
-		/opt/homebrew/lib/QtCore.framework/Headers/qstring.h
+		/opt/homebrew/lib/QtCore.framework/Headers/qstring.h \
+		/opt/homebrew/lib/QtWidgets.framework/Headers/QMessageBox \
+		/opt/homebrew/lib/QtWidgets.framework/Headers/qmessagebox.h \
+		/opt/homebrew/lib/QtCore.framework/Headers/QDebug \
+		/opt/homebrew/lib/QtCore.framework/Headers/qdebug.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o MainWindow.o MainWindow.cpp
 
 wordle.o: wordle.cpp 

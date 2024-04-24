@@ -7,18 +7,19 @@
 class Game
 {
 public:
-    Game();                            // constructor to initialize the game
-    QString processGuess(const QString &guess);  // process the user's guess and return feedback
-    void resetGame();                  // resets the game to start anew
-    int remainingGuesses() const;      // getter for the remaining guesses
+    Game();                            // Constructor to initialize the game
+    QString processGuess(const QString &guess);  // Process the user's guess and return feedback
+    void resetGame();                  // Resets the game to start anew
+    int remainingGuesses() const;      // Getter for the remaining guesses
+    QString getHiddenWord() const;     // Getter for the hidden word
 
 private:
-    QString hiddenWord;                // the word that needs to be guessed
-    int remainingGuessesValue;         // number of remaining guesses
-    std::vector<std::string> words;    // vector to hold all possible words
+    QString hiddenWord;                // The word that needs to be guessed
+    int remainingGuessesValue;         // Number of remaining guesses
+    std::vector<std::string> words;    // Vector to hold all possible words
 
-    void loadWords();                  // load words from file
-    void selectRandomWord();           // select a random word from the list
+    void loadWords();                  // Load words from file
+    void selectRandomWord();           // Select a random word from the list
 };
 
 #endif // GAME_HPP
