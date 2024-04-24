@@ -1,13 +1,13 @@
-#include "game.hpp"
+#include "Game.hpp"
 
-Game::Game() : remainingGuesses(6) 
+Game::Game() : remainingGuesses(6)
 {
-    hiddenWord = "hello";  
+    hiddenWord = "hello";
 }
 
-QString Game::processGuess(const QString &guess) 
+QString Game::processGuess(const QString &guess)
 {
-    if (guess.length() != hiddenWord.length()) 
+    if (guess.length() != hiddenWord.length())
     {
         return "Incorrect length";
     }

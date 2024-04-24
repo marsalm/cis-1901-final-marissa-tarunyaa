@@ -1,15 +1,30 @@
 {
-    "version": "2.0.0",
-    "tasks": [
-      {
-        "label": "build my project",
-        "type": "shell",
-        "command": "qmake && make",
-        "group": {
-          "kind": "build",
-          "isDefault": true
-        }
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Run qmake",
+      "type": "shell",
+      "command": "/usr/local/opt/qt/bin/qmake",
+      "group": "build",
+      "problemMatcher": [
+        "$gcc"
+      ],
+      "presentation": {
+        "reveal": "always"
       }
-    ]
-  }
-  
+    },
+    {
+      "label": "Run make",
+      "type": "shell",
+      "command": "make",
+      "group": "build",
+      "dependsOn": "Run qmake",
+      "problemMatcher": [
+        "$gcc"
+      ],
+      "presentation": {
+        "reveal": "always"
+      }
+    }
+  ]
+}

@@ -1,17 +1,19 @@
 {
   "configurations": [
     {
-      "name": "macos-clang-x64",
+      "name": "Mac",
       "includePath": [
-        "${workspaceFolder}/**"
+        "${workspaceFolder}/**",
+        "/usr/local/opt/qt/include/**"
+      ],
+      "defines": [],
+      "macFrameworkPath": [
+        "/usr/local/opt/qt/lib"
       ],
       "compilerPath": "/usr/bin/clang",
-      "cStandard": "${default}",
-      "cppStandard": "${default}",
-      "intelliSenseMode": "macos-clang-x64",
-      "compilerArgs": [
-        ""
-      ]
+      "cStandard": "c11",
+      "cppStandard": "c++17",
+      "intelliSenseMode": "macos-clang-x64"
     }
   ],
   "version": 4

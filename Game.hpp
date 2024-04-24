@@ -4,7 +4,7 @@
 #include <QString>
 #include <vector>
 
-class Game 
+class Game
 {
 public:
     Game();
@@ -12,7 +12,7 @@ public:
 
 private:
     QString hiddenWord;
-    int remainingGuesses;
+    // int remainingGuesses;
 };
 
 #endif // GAME_HPP
