@@ -38,7 +38,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent), game()
 void MainWindow::onGuessEntered()
 {
     QString guess = input->text().toUpper();
-    QString result = game.processGuess(guess);
     try
     {
         if (guess.length() != 5)
@@ -51,6 +50,35 @@ void MainWindow::onGuessEntered()
         {
             throw std::invalid_argument("That word doesn't exist, guess again!");
         }
+
+        // Process the guess only if it's valid
+        QString result = game.processGuess(guess);
+        input->clear();
+        // Display the result on the grid
+        static int currentRow = 0;
+        if (currentRow < 6)
+        {
+            for (int i = 0; i < 5; ++i)
+            {
+                gridLabels[currentRow][i]->setText(guess[i]); // Display the guessed letter in uppercase
+
+                if (result[i].toLatin1() == guess[i].toLower().toLatin1())
+                {
+                    gridLabels[currentRow][i]->setStyleSheet("background-color: green; color: white; border: 1px solid black;");
+                }
+                else if (result[i] == '*')
+                {
+                    gridLabels[currentRow][i]->setStyleSheet("background-color: yellow; color: black; border: 1px solid black;");
+                }
+                else
+                {
+                    gridLabels[currentRow][i]->setStyleSheet("background-color: gray; color: white; border: 1px solid black;");
+                }
+            }
+            ++currentRow;
+        }
+
+        checkGameOver(currentRow, result);
     }
     catch (const std::length_error &e)
     {
@@ -70,32 +98,6 @@ void MainWindow::onGuessEntered()
         // Catch all other types of exceptions
         QMessageBox::warning(this, "Error", "An unexpected error has occurred.");
     }
-    input->clear();
-    // Display the result on the grid
-    static int currentRow = 0;
-    if (currentRow < 6)
-    {
-        for (int i = 0; i < 5; ++i)
-        {
-            gridLabels[currentRow][i]->setText(guess[i]); // Display the guessed letter in uppercase
-
-            if (result[i].toLatin1() == guess[i].toLower().toLatin1())
-            {
-                gridLabels[currentRow][i]->setStyleSheet("background-color: green; color: white; border: 1px solid black;");
-            }
-            else if (result[i] == '*')
-            {
-                gridLabels[currentRow][i]->setStyleSheet("background-color: yellow; color: black; border: 1px solid black;");
-            }
-            else
-            {
-                gridLabels[currentRow][i]->setStyleSheet("background-color: gray; color: white; border: 1px solid black;");
-            }
-        }
-        ++currentRow;
-    }
-
-    checkGameOver(currentRow, result);
 }
 
 void MainWindow::checkGameOver(int currentRow, const QString &result)

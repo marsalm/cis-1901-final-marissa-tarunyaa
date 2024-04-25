@@ -7,7 +7,7 @@
 #include <vector>
 #include <future>
 #include <thread>
-
+#include <stdexcept>
 using namespace wordle;
 
 // Constructor
@@ -28,12 +28,12 @@ void Game::loadWords()
     std::string word;
     while (file >> word)
     {
-        words.push_back(word);
+        words.push_back(word); // adds word to end dynamic array
     }
     file.close();
     if (!words.empty())
     {
-        selectRandomWord(); // Now it's safe to select a random word
+        selectRandomWord(); // now it's safe to select a random word
     }
 }
 
@@ -49,6 +49,12 @@ void Game::selectRandomWord()
 
 QString Game::processGuess(const QString &guess)
 {
+
+    if (guess.isEmpty())
+    {
+        throw std::invalid_argument("Empty guess");
+    }
+
     if (guess.length() != hiddenWord.length())
     {
         throw std::invalid_argument("Incorrect length");
@@ -97,6 +103,10 @@ QString Game::processGuess(const QString &guess)
 void Game::resetGame()
 {
     wordLoadFuture.wait(); // Ensure word loading is completed
+    if (words.empty())
+    {
+        throw std::logic_error("No words loaded"); // Throw an exception if no words are loaded
+    }
     remainingGuessesValue = 6;
     selectRandomWord();
 }
