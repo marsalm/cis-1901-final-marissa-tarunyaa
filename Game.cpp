@@ -3,25 +3,38 @@
 #include <fstream>
 #include <random>
 #include <ctime>
-#include <cctype> 
+#include <cctype>
 #include <vector>
+#include <future>
+#include <thread>
+
+using namespace wordle;
 
 // Constructor
 Game::Game() : remainingGuessesValue(6)
 {
-    loadWords();
-    selectRandomWord();
+    // loadWords();
+    wordLoadFuture = std::async(std::launch::async, &Game::loadWords, this);
+    // selectRandomWord();
 }
 
 void Game::loadWords()
 {
     std::ifstream file("words.txt");
+    if (!file)
+    {
+        throw std::runtime_error("Unable to open words file");
+    }
     std::string word;
     while (file >> word)
     {
         words.push_back(word);
     }
     file.close();
+    if (!words.empty())
+    {
+        selectRandomWord(); // Now it's safe to select a random word
+    }
 }
 
 void Game::selectRandomWord()
@@ -29,7 +42,7 @@ void Game::selectRandomWord()
     if (!words.empty())
     {
         std::mt19937 rng(static_cast<unsigned int>(std::time(nullptr))); // random-number engine used with a uniform distribution
-        std::uniform_int_distribution<int> dist(0, words.size() - 1); // uniform distribution
+        std::uniform_int_distribution<int> dist(0, words.size() - 1);    // uniform distribution
         hiddenWord = QString::fromStdString(words[dist(rng)]);
     }
 }
@@ -38,7 +51,7 @@ QString Game::processGuess(const QString &guess)
 {
     if (guess.length() != hiddenWord.length())
     {
-        return "Incorrect length";
+        throw std::invalid_argument("Incorrect length");
     }
 
     std::string stdGuess = guess.toLower().toStdString();
@@ -49,21 +62,25 @@ QString Game::processGuess(const QString &guess)
     std::vector<bool> used(stdHiddenWord.size(), false);
 
     // First pass with transform: Check for correct letters in the correct positions
-    std::transform(stdGuess.begin(), stdGuess.end(), stdHiddenWord.begin(), result.begin(), 
-                   [&](char g, char h) -> char {
-                       size_t index = &h - &*stdHiddenWord.begin(); // Calculate index
-                       if (g == h) {
-                           used[index] = true; // Mark this character as used
-                           return std::tolower(g); // Return the uppercase version of g
-                       }
-                       return '_';
-                   });
+    for (size_t i = 0; i < stdGuess.size(); ++i)
+    {
+        if (stdGuess[i] == stdHiddenWord[i]) // originally, size_t index = &h - &*stdHiddenWord.begin(); // Calculate index
+        // was causing segmentation fault because of unsafe pointer arithematic
+        {
+            used[i] = true;
+            result[i] = stdGuess[i]; // Preserves the lowercase letter
+        }
+    }
 
     // Second pass: Check for correct letters in incorrect positions
-    for (size_t i = 0; i < stdGuess.size(); ++i) {
-        if (result[i] == '_') { // Not correctly guessed
-            for (size_t j = 0; j < stdHiddenWord.size(); ++j) {
-                if (stdGuess[i] == stdHiddenWord[j] && !used[j]) {
+    for (size_t i = 0; i < stdGuess.size(); ++i)
+    {
+        if (result[i] == '_')
+        { // Not correctly guessed
+            for (size_t j = 0; j < stdHiddenWord.size(); ++j)
+            {
+                if (stdGuess[i] == stdHiddenWord[j] && !used[j])
+                {
                     used[j] = true;
                     result[i] = '*'; // Mark as correct letter, wrong position
                     break;
@@ -79,6 +96,7 @@ QString Game::processGuess(const QString &guess)
 
 void Game::resetGame()
 {
+    wordLoadFuture.wait(); // Ensure word loading is completed
     remainingGuessesValue = 6;
     selectRandomWord();
 }
@@ -88,13 +106,13 @@ int Game::remainingGuesses() const
     return remainingGuessesValue;
 }
 
-QString Game::getHiddenWord() const 
+QString Game::getHiddenWord() const
 {
     return hiddenWord;
 }
 
 bool Game::wordExists(const QString &word)
 {
-    std::string lowerWord = word.toLower().toStdString();  // Convert to lower case for comparison
+    std::string lowerWord = word.toLower().toStdString(); // Convert to lower case for comparison
     return std::find(words.begin(), words.end(), lowerWord) != words.end();
 }

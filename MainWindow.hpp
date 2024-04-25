@@ -9,6 +9,7 @@
 #include <QLineEdit>
 #include <QVector>
 #include "Game.hpp"
+using namespace wordle;
 
 class MainWindow : public QMainWindow
 {
@@ -22,12 +23,12 @@ private:
     QGridLayout *mainLayout;
     QLineEdit *input;
     QPushButton *submitButton;
-    QVector<QVector<QLabel*>> gridLabels; 
+    QVector<QVector<QLabel *>> gridLabels;
     Game game;
 
 private slots:
     void onGuessEntered();
-    void checkGameOver(int currentRow, const QString& result);
+    void checkGameOver(int currentRow, const QString &result);
 };
 
 #endif // MAINWINDOW_HPP
