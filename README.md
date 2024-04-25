@@ -1,7 +1,7 @@
 # CIS 1901 S24 Final Project. 
 
 ## Authors
-Marissa Almonte and Tarunyaa Sivakumar
+Marissa Almonte and Tarunyaa Sivakumar 
 
 ## Project Proposal: C++ Chat Application
 ### Overview
