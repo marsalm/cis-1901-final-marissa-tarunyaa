@@ -5,7 +5,7 @@ Marissa Almonte and Tarunyaa Sivakumar
 
 ## Project Proposal: C++ Chat Application
 ### Overview
-Our project aims to develop a Wordle game using C++, providing a text-based interface for players to guess a hidden word within a limited number of attempts inspired by the NYT game. This application will incorporate templates for flexibility and using the Qt framework to implement a graphical user interface to increase our complexity. 
+Our project aims to develop a Wordle game using C++, providing a text-based interface for players to guess a hidden word within a limited number of attempts inspired by the NYT game. This application will incorporate templates for flexibility and using the Qt framework to implement a graphical user interface to increase our complexity.  
 
 
 ### Technical Specifications and Libraries
